@@ -1,0 +1,68 @@
+.footer,
+.footer2 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #8e8e8e;
+}
+.footer {
+  align-items: center;
+}
+.footer2 {
+  align-items: left;
+}
+.footer2 p {
+  margin-left: 2.5em;
+}
+.gettheapp {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #8e8e8e;
+}
+.app_store {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 3px;
+  padding: 8px 15px;
+  margin: 5px;
+}
+.play_store {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 3px;
+  padding: 8px 15px;
+  margin: 5px;
+}
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 1em;
+}
+
+.footer2 ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  list-style: none;
+  gap: 1em;
+}
+
+.footer ul li a,
+.footer2 ul li a {
+  color: #8e8e8e;
+  text-decoration: none;
+  font-size: x-small;
+  text-transform: capitalize;
+}

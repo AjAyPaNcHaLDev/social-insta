@@ -1,0 +1,10 @@
+.main-content {
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+  flex-direction: column;
+  margin-left: 10%;
+}
+.wrapper {
+  display: flex;
+}

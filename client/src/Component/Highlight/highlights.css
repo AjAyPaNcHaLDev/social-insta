@@ -1,0 +1,29 @@
+.story-main {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  justify-content: space-evenly;
+  padding: 0.4em;
+  gap: 0.6em;
+  align-items: center;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.story-main::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.story-main {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.story-spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

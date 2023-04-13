@@ -1,0 +1,116 @@
+.Posts {
+  width: 80%;
+  height: 100%;
+  padding: 1em;
+  margin: 0 auto;
+  display: grid;
+  /* gap: 5em; */
+  justify-content: baseline;
+  align-items: center;
+}
+.post {
+  width: 100%;
+  display: grid;
+  gap: 0.7em;
+}
+.post-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-info {
+  position: relative;
+  line-height: 12px;
+  margin-top: -1em;
+  display: flex;
+  flex-direction: column;
+}
+.post-info div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 5px;
+}
+.post-content {
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.3em;
+  margin: 0 auto;
+}
+.post-img {
+  border-radius: 1%;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  max-height: 90vh;
+}
+.post-video {
+  border-radius: 1%;
+  width: 100%;
+  max-height: 70vh;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: black;
+}
+audio::-webkit-media-controls-timeline,
+video::-webkit-media-controls-timeline {
+  display: none;
+}
+audio::-webkit-media-controls,
+video::-webkit-media-controls {
+  /* display: none; */
+  display: flex;
+}
+.postFooters .buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.postFooters button {
+  background: transparent;
+  border: none;
+  font-size: xx-large;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 2px;
+}
+
+.comment-inp-box {
+  position: relative;
+  width: 100%;
+  padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 0px;
+}
+.comment-input {
+  min-width: 85%;
+  max-height: 3em;
+  position: relative;
+  padding: 1em;
+  border: none;
+  font-size: medium;
+  font-weight: 100;
+  resize: none;
+}
+
+.comment-input:focus {
+  border: none;
+  outline: none;
+}
+.comment-inp-box button {
+  z-index: 1;
+  font-size: medium;
+  font-weight: 600;
+  font-family: sans-serif;
+  color: #0f9bf6;
+  cursor: pointer;
+}
+.comment-inp-box span {
+  z-index: 1;
+  font-size: medium;
+  cursor: pointer;
+}

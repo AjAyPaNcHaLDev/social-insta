@@ -1,0 +1,29 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* grid Desktop default */
+
+/* styleing */
+.wrapper {
+  display: flex;
+}
+.main-content {
+  max-width: 60vw;
+  margin: 0 auto;
+}
+.Profile-Screen {
+  max-width: 60vw;
+  margin: 0 auto;
+}
+
+.main-right-sidebar {
+  margin-left: 4em;
+  min-width: 14vw;
+}
+a,
+li,
+p {
+  user-select: none;
+}

@@ -1,0 +1,81 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  min-height: 100vh;
+  border-right: 1px solid #bfb6b6;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: transparent;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.logo-box {
+  position: relative;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  user-select: none;
+}
+
+.nav-list {
+  display: contents;
+  list-style: none;
+}
+
+.nav-list-item {
+  cursor: pointer;
+  padding: 0.2em;
+}
+
+.nav-list-item:hover a {
+  background-color: #fbfbfb;
+}
+
+.nav-list-item a {
+  border-radius: 24px;
+  text-decoration: none;
+  color: black;
+  padding: 1em;
+  width: 100%;
+  display: block;
+  font-weight: 100;
+  display: flex;
+  justify-content: left;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.navbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.navbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Fixed bottom navigation bar */
+.nav-btm-fixed {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding: 0.5em;
+  z-index: 1;
+}
+
+.nav-btm-fixed li {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 1em;
+  position: relative;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  bottom: 0;
+  top: 0;
+}
