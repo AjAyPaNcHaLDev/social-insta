@@ -5,17 +5,30 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Style.css";
 import FacebookLogin from "react-facebook-login";
-import responseFacebook, { componentClicked } from "./Facbook";
+import userSlice, {
+  facebookLogin,
+  registerUser,
+} from "../../store/userSlice/userSlice";
+
+import { useSelector, useDispatch } from "react-redux";
 import { PORT, fbAppId } from "../../Config";
 const SignUp = () => {
   const navigate = useNavigate();
-
+  const isLogined = useSelector((state) => state.user.isLogined);
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     username: "",
     password: "",
     contect: "",
     name: "",
   });
+  useEffect(() => {
+    isLogined == true ? navigate("/") : null;
+  });
+
+  const handleFacebookResponse = (response) => {
+    dispatch(facebookLogin(response));
+  };
   const formHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -24,17 +37,14 @@ const SignUp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    axios
-      .post(
-        `${location.protocol}//${location.hostname}:${PORT}/insert/user`,
-        form
-      )
-      .then((success) => {
-        console.log(success);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(registerUser(form));
+    // axios
+    //   .post(
+    //     `${location.protocol}//${location.hostname}:${PORT}/insert/user`,
+    //     form
+    //   )
+    //   .then((success) => {})
+    //   .catch((error) => {});
   };
 
   return (
@@ -62,8 +72,8 @@ const SignUp = () => {
               appId={fbAppId}
               autoLoad={false}
               fields="name,email,picture"
-              onClick={componentClicked}
-              callback={responseFacebook}
+              onClick={() => {}}
+              callback={handleFacebookResponse}
               cssClass="btn login"
             />
             <div

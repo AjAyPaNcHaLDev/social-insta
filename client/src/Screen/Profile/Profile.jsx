@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Profile.css";
 import { Story } from "../../Component/Story/StoryContainer";
 import ajaydp from "../../assets/img/ajaydp.jpg";
 import SideNavBar from "../../Component/Nav/SideNavBar";
 import { RiPriceTag2Fill } from "react-icons/ri";
-
 import Reel from "../../assets/svg/instagram-reels-icon.svg";
-
+import { TbRosette } from "react-icons/tb";
+import Highlights from "../../Component/Highlight/Highlights";
+import SaveIcon from "../../assets/svg/save.svg";
 import { BsGrid3X3 } from "react-icons/bs";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { PORT } from "../../Config";
+
 const Profile = () => {
   document.title = "Ajay Panchal (@ajaypanchal_1)";
+
+  const parms = useParams();
+
   return (
     <React.Fragment>
       <SideNavBar />
@@ -22,9 +30,30 @@ const Profile = () => {
   );
 };
 
-import { TbRosette } from "react-icons/tb";
-import Highlights from "../../Component/Highlight/Highlights";
 const UserInfo = () => {
+  const parms = useParams();
+  useEffect(() => {
+    getUser();
+  });
+  const { username } = parms;
+  const getUser = async () => {
+    // axios
+    //   .post(
+    //     `${location.protocol}//${location.hostname}:${PORT}/user`,
+    //     { username },
+    //     {
+    //       headers: {
+    //         authorization: localStorage.getItem("token"),
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {})
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
   return (
     <div className="user-info">
       <div className="dp-box">
@@ -35,7 +64,7 @@ const UserInfo = () => {
           className="box-flex"
           style={{ justifyContent: "left", alignItems: "center", gap: 10 }}
         >
-          <h3>ajaypanchal_1</h3>
+          <h3>{username}</h3>
           <button className="edit-btn">Edit Profile</button>
           <button
             style={{
@@ -77,7 +106,6 @@ const UserInfo = () => {
   );
 };
 
-import SaveIcon from "../../assets/svg/save.svg";
 const NavBar = () => {
   return (
     <ul className="prof-navbar">

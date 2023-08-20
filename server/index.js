@@ -10,7 +10,7 @@ if (cluster.isPrimary) {
   }
   cluster.on("exit", (worker, code, signal) => {
     console.log(`worker ${worker.process.id} died`);
-    // cluster.fork();
+    cluster.fork();
   });
 } else {
   require("./app");

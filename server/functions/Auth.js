@@ -1,7 +1,8 @@
 const user = require("../db/model/user.model");
 const userAction = require("./User");
 const Const = require("../const");
-const authUser = async (req, res, jwt) => {
+const jwt = require("jsonwebtoken");
+const authUser = async (req, res) => {
   console.log("authUser called");
   const { username, password } = req.body;
   let conditon = {
@@ -34,8 +35,13 @@ const authUser = async (req, res, jwt) => {
           { expiresIn: `${1000 * 1000 * 2}s` },
           (err, token) => {
             res.send({
-              success: { token },
-              msg: "Auth Success",
+              status: Const.Authorized,
+              token,
+              name,
+              username,
+              email,
+              _id,
+              error: err,
             });
           }
         );
@@ -43,35 +49,43 @@ const authUser = async (req, res, jwt) => {
         return;
       }
       res.send({
-        error: {},
+        status: Const.Unauthorized,
+        error: true,
         msg: "Not Registerd",
       });
       return;
     })
     .catch(async (error) => {
-      res.send({ error, msg: "Something Went Wrong." });
+      res.send({
+        status: Const.Unauthorized,
+        error,
+        msg: "Something Went Wrong.",
+      });
     });
 };
-const authFb = async (req, res, jwt) => {
-  // step 1 first check user already register or not.
-  // step 2 if already register  redirect to login .
-  // step 3 if not registered registred first then redirect to login.
-  // const { username, password } = req.body;
-  // step 0 gatting responce
+const authFb = async (req, res) => {
+  /*step 1 first check user already register or not.
+   * step 2 if already register  redirect to login .
+   * step 3 if not registered registred first then redirect to login.
+   * const { username, password } = req.body;
+   *step 0 gatting responce */
   const { name, email = null, userID, status = null } = req.body;
 
   if (status == "unknown") {
-    res.send({ error: {}, msg: "Something Went Wrong." });
+    res.send({
+      status: Const.Unauthorized,
+      error: true,
+      msg: "Something Went Wrong.",
+    });
     return;
   }
-  // step1
-
+  /* step1*/
   await user
     .findOne({ fbUserID: userID })
     .then(async (__res) => {
       if (__res == null) {
-        //   register the new user hare.
-        // gating new username
+        /*   register the new user hare.
+         gating new username */
 
         const username = userAction.assignUserName();
         let registerMe = {
@@ -91,8 +105,12 @@ const authFb = async (req, res, jwt) => {
               { expiresIn: `${1000 * 1000 * 2}s` },
               (err, token) => {
                 res.send({
-                  success: { token },
-                  msg: "Auth Success",
+                  status: Const.Authorized,
+                  token,
+                  name,
+                  username,
+                  email,
+                  _id,
                 });
               }
             );
@@ -101,7 +119,6 @@ const authFb = async (req, res, jwt) => {
             res.send({ error, msg: "Something Went Wrong." });
           });
       } else {
-        console.log(__res);
         const { name, email, username, fbUserID, _id } = __res;
         jwt.sign(
           { name, email, username, fbUserID, _id },
@@ -109,17 +126,24 @@ const authFb = async (req, res, jwt) => {
           { expiresIn: `${1000 * 1000 * 2}s` },
           (err, token) => {
             res.send({
-              success: { token },
-              msg: "Auth Success",
+              status: Const.Authorized,
+              token,
+              name,
+              username,
+              email,
+              _id,
             });
           }
         );
-        // res.send({ success: __res, msg: "Already Registered." });
         return;
       }
     })
     .catch(async (error) => {
-      res.send({ error, msg: "Something went worng." });
+      res.send({
+        status: Const.Unauthorized,
+        error,
+        msg: "Something went wrong.",
+      });
     });
 };
 const Auth = {

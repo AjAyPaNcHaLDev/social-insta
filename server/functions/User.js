@@ -1,4 +1,6 @@
+const Const = require("../const");
 const user = require("../db/model/user.model");
+const jwt = require("jsonwebtoken");
 const insertUser = async (req, res) => {
   console.log("insertUser called");
   const { name, username, contect, password } = req.body;
@@ -28,17 +30,46 @@ const insertUser = async (req, res) => {
         await usr
           .save()
           .then((success) => {
-            res.send({ success, msg: "Register Sucessfull." });
+            const { name, username, email, _id } = success;
+            jwt.sign(
+              { name, email, username, _id },
+              Const.jwtKey,
+              { expiresIn: `${1000 * 1000 * 2}s` },
+              (err, token) => {
+                res.send({
+                  status: Const.Authorized,
+                  name,
+                  username,
+                  email,
+                  _id,
+                  token,
+                  error: false,
+                  msg: "Register Sucessfull.",
+                });
+              }
+            );
           })
           .catch((error) => {
-            res.send({ error, msg: "Something went worng." });
+            res.send({
+              error,
+              status: Const.Unauthorized,
+              msg: "Something went worng.",
+            });
           });
       } else {
-        res.send([{ error: {}, msg: "Already register Details" }]);
+        res.send({
+          status: Const.Unauthorized,
+          error: true,
+          msg: "Already register Details",
+        });
       }
     })
     .catch((error) => {
-      res.send({ error, msg: "Something went worng." });
+      res.send({
+        error,
+        status: Const.Unauthorized,
+        msg: "Something went worng.",
+      });
     });
 };
 const updateUser = async () => {

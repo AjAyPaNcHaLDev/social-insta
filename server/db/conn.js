@@ -1,11 +1,16 @@
 const { default: mongoose } = require("mongoose");
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.db);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    await mongoose.connect(process.env.db);
+    console.log(`MongoDB Url 1 Connected`);
   } catch (error) {
-    console.log(error);
-    process.exit(1);
+    console.log("Conneting Url 1 Failed");
+    try {
+      await mongoose.connect("mongodb://0.0.0.0:27017/");
+      console.log(`MongoDB Url 2 Connected`);
+    } catch (error) {
+      console.log("Conneting Url 2 Failed");
+    }
   }
 };
 
