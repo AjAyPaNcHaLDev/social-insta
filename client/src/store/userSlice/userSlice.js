@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { URL } from "../../Config";
+import { URL } from "../../app/Config";
 import axios from "axios";
 const initialState = {
   loading: "idle" | "pending" | "succeeded" | "failed",
@@ -16,17 +16,19 @@ const rejected = (state, action) => {
 };
 const fulfilled = (state, action) => {
   const {
-    name = "",
-    username = "",
-    _id = "",
-    email = "",
+    name = state.name,
+    username = state.username,
+    _id = state._id,
+    email = state.email,
     token = null,
+    profile_picture = state.profile_picture,
   } = action.payload;
   state.user = {
     name,
     username,
     _id,
     email,
+    profile_picture,
   };
   state.isLogined = true;
   state.loading = "succeeded";
@@ -50,7 +52,10 @@ const userSlice = createSlice({
       .addCase(facebookLogin.fulfilled, fulfilled)
       .addCase(registerUser.pending, pending)
       .addCase(registerUser.rejected, rejected)
-      .addCase(registerUser.fulfilled, fulfilled);
+      .addCase(registerUser.fulfilled, fulfilled)
+      .addCase(uploadProfilePicture.pending, pending)
+      .addCase(uploadProfilePicture.rejected, rejected)
+      .addCase(uploadProfilePicture.fulfilled, profilePictureFulfiled);
   },
 });
 export const fetchLogin = createAsyncThunk("tk/user", async (tk, thunkApi) => {
@@ -120,5 +125,27 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+export const uploadProfilePicture = createAsyncThunk(
+  "user/pic",
+  async (img, thunk) => {
+    try {
+      const form = new FormData();
+      form.set("profile_picture", img);
+      const { data } = await axios.post(`${URL}/user/pic`, form, {
+        headers: {
+          authorization: localStorage.getItem("token"),
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return data;
+    } catch (error) {
+      return thunk.rejectWithValue(error);
+    }
+  }
+);
 
 export default userSlice.reducer;
+
+const profilePictureFulfiled = (state, action) => {
+  state.user.profile_picture = action.payload.profile_picture;
+};

@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   username: { type: String },
   password: { type: String },
   fbUserID: { type: Number },
+  bio: { type: String },
+  profile_picture: { type: String },
 });
 
 const user = mongoose.model("USER", userSchema);

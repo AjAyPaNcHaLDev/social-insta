@@ -1,3 +1,7 @@
+/**
+ * This is the Primary File hare staring all the Processes. in avalable all cpu
+ */
+
 const cluster = require("cluster");
 const os = require("os");
 const processCluster = require("process");
@@ -13,8 +17,9 @@ if (cluster.isPrimary) {
     cluster.fork();
   });
 } else {
-  require("./app");
+  try {
+    require("./app");
+  } catch (error) {
+    console.log(error);
+  }
 }
-/**
- * This is the Primary File hare staring all the Processes. in avalable all cpu
- */

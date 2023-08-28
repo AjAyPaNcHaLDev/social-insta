@@ -1,0 +1,73 @@
+.Profile-Screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  margin: auto;
+}
+.user-info {
+  gap: 3em;
+  display: flex;
+}
+.box-flex {
+  display: flex;
+}
+.dp-box {
+  min-height: 100px;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.bio {
+  min-width: 100px;
+  max-width: 400px;
+}
+.edit-btn {
+  border: none;
+  padding: 0.7em 1em;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  height: fit-content;
+  color: #4c4b4b;
+  font-family: sans-serif;
+  border-radius: 8px;
+}
+.btn-no-border {
+  background: transparent;
+  border: none;
+  font-size: larger;
+  text-align: center;
+}
+.prof-navbar {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid #d0cdcd;
+}
+
+.prof-navbar a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 0 0 0.3rem;
+}
+
+.prof-navbar .active {
+  border-top: 1px solid black;
+  background-color: #dfd9d967;
+}
+.dp-box {
+  position: relative;
+}
+.dp-box-span {
+  position: absolute;
+  bottom: 30px;
+}
